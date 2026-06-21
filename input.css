@@ -3,79 +3,18 @@
     themes: black --default;
 };
 
-body {
-    @apply flex min-h-screen p-4 flex-col gap-4;
+textarea {
+    height: clamp(1vh, 10vh, 20vh);
 }
+.set-accordion-content {
+    grid-template-columns: repeat(auto-fill, 200px);
 
-header {
-    @apply flex;
-
-    .box-container {
-        @apply card bg-base-300 grid h-fit w-full items-center gap-4 rounded-xl p-4;
-
-        grid-template-columns: 1fr 1fr;
-
-        .box-wrapper {
-            @apply flex flex-col gap-4;
-
-            .box-title {
-                @apply flex items-center justify-between text-lg font-bold;
-                
-                h3 {
-                    @apply px-2;
-                }
-            }
-
-            textarea {
-                @apply textarea textarea-neutral w-full resize-none rounded-2xl;
-                
-                height: clamp(1vh, 10vh, 20vh);
-            }
-        }
+    .card-display > img {
+        aspect-ratio: auto 200 / 279;
     }
-}
 
-.sets-accordions {
-    @apply join join-vertical bg-base-100 rounded-2xl;
-
-    .set-accordion {
-        @apply collapse join-item border-base-300 border;
-
-        summary {
-            @apply collapse-title font-semibold cursor-pointer;
-        }
-
-        .set-accordion-content {
-            @apply grid w-full h-fit justify-center gap-4;
-
-            grid-template-columns: repeat(auto-fill, 200px);
-
-            .card-display {
-                @apply flex flex-col gap-2;
-
-                img {
-                    aspect-ratio: auto 200 / 279;
-                }
-
-                .card-footer {
-                    @apply flex px-2 justify-between items-center;
-
-                    .input-wrapper {
-                        @apply flex flex-col items-center gap-2;
-
-                        p {
-                            @apply w-fit text-sm;
-                        }
-
-                        input {
-                            @apply input input-neutral join-item rounded-xl;
-
-                            width: calc(var(--size) * 2);
-                            height: var(--size);
-                        }
-                    }
-                }
-            }
-        }
+    input {
+        width: calc(var(--size) * 2);
+        height: var(--size);
     }
 }

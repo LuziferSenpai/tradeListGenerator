@@ -7,22 +7,22 @@
         <link href="./index.css" rel="stylesheet">
         <script src="./index.js"></script>
     </head>
-    <body>
-        <header>
-            <div class="box-container">
-                <div class="box-wrapper">
-                    <div class="box-title">
-                        <h3>Import</h3>
+    <body class="flex min-h-screen p-4 flex-col gap-4">
+        <header class="flex">
+            <div class="card grid w-full h-fit p-4 grid-cols-2 items-center gap-4 rounded-xl bg-base-300">
+                <div class="flex flex-col gap-4">
+                    <div class="flex items-center justify-between text-lg font-bold">
+                        <h3 class="px-2">Import</h3>
                         <button id="btn-import" class="btn btn-primary rounded-2xl" onclick="importWishlist()">Import</button>
                     </div>
-                    <textarea id="import-field" placeholder="Paste JSON file content" spellcheck="false"></textarea>
+                    <textarea id="import-field" class="textarea textarea-neutral w-full resize-none rounded-2xl" placeholder="Paste JSON file content" spellcheck="false"></textarea>
                 </div>
-                <div class="box-wrapper">
-                    <div class="box-title">
+                <div class="flex flex-col gap-4">
+                    <div class="flex items-center justify-between text-lg font-bold">
                         <button id="btn-export" class="btn btn-primary rounded-2xl" onclick="exportWishlist()">Export</button>
-                        <h3>Export</h3>
+                        <h3 class="px-2">Export</h3>
                     </div>
-                    <textarea id="export-field" placeholder="Exported JSON will appear here…" readonly spellcheck="false"></textarea>
+                    <textarea id="export-field" class="textarea textarea-neutral w-full resize-none rounded-2xl" placeholder="Exported JSON will appear here…" readonly spellcheck="false"></textarea>
                 </div>
             </div>
         </header>
@@ -49,7 +49,7 @@
                 <div class="divider w-full">Sets</div>
                 <button class="btn flex w-fit items-center rounded-2xl" onclick="clearWishlist()">Clear Wishlist</button>
             </div>
-            <div id="sets-accordions" class="sets-accordions">
+            <div id="sets-accordions" class="join join-vertical bg-base-100 rounded-2xl">
             </div>
         </main>
         <div id="toast" class="toast toast-top toast-center"></div>

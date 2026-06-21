@@ -157,11 +157,11 @@ function renderSets(sets) {
 
         if (!accordion) {
             accordion = document.createElement("details");
-            accordion.classList.add("set-accordion");
+            accordion.classList.add("set-accordion", "collapse", "join-item", "border-base-300", "border");
             accordion.name = setName;
             accordion.innerHTML = `
-                <summary>${setName}</summary>
-                <div class="collapse-content set-accordion-content"></div>
+                <summary class="collapse-title cursor-pointer font-semibold">${setName}</summary>
+                <div class="set-accordion-content collapse-content grid w-full h-fit justify-center gap-4"></div>
             `;
 
             wrapper.appendChild(accordion);
@@ -182,18 +182,18 @@ function renderSets(sets) {
             const saved = getWishlistCard(set, card.index);
             const cardWrapper = document.createElement("div");
 
-            cardWrapper.classList.add("card-display");
+            cardWrapper.classList.add("card-display", "flex", "flex-col", "gap-2");
             cardWrapper.dataset.cardId = card.index;
             cardWrapper.innerHTML = `
                 <img src="sets/${setName}/${String(card.index).padStart(3, "0")}.png" />
-                <div class="card-footer">
-                    <div class="input-wrapper">
-                        <p>Want:</p>
-                        <input data-field="want" type="number" value="${saved?.want ?? 0}" min="0" />
+                <div class="flex items-center justify-between px-2">
+                    <div class="flex flex-col items-center gap-2">
+                        <p class="w-fit text-sm">Want:</p>
+                        <input class="input input-neutral join-item rounded-xl" data-field="want" type="number" value="${saved?.want ?? 0}" min="0" />
                     </div>
-                    <div class="input-wrapper">
-                        <p>Have:</p>
-                        <input data-field="have" type="number" value="${saved?.have ?? 0}" min="0" />
+                    <div class="flex flex-col items-center gap-2">
+                        <p class="w-fit text-sm">Have:</p>
+                        <input class="input input-neutral join-item rounded-xl" data-field="have" type="number" value="${saved?.have ?? 0}" min="0" />
                     </div>
                 </div>
             `;
