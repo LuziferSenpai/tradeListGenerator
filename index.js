@@ -215,14 +215,14 @@ function renderSets(sets) {
 
 document.addEventListener("DOMContentLoaded", async () => {
     const rarityDisplay = document.getElementById("rarity-display");
-    const [setsJSON, currentlyTradeableJSON] = await Promise.all([
+    const [setsJSON, tradeableJSON] = await Promise.all([
         fetch("./sets.json").then(res => res.json()),
         fetch("./currentlyTradeable.json").then(res => res.json())
     ]);
 
     document.getElementById("name-filter").value = filterAtom.get().name;
 
-    allSetsAtom.set(setsJSON.map(set => set.cards ? { ...set, cards: set.cards.filter(card => currentlyTradeableJSON.includes(card.rarity)) } : set));
+    allSetsAtom.set(setsJSON.map(set => set.cards ? { ...set, cards: set.cards.filter(card => tradeableJSON.includes(card.rarity)) } : set));
 
     setsAtom.subscribe(sets => renderSets(sets));
     setsAtom.set(allSetsAtom.get());
