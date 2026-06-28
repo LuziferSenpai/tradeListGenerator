@@ -3,7 +3,6 @@ const filterAtom = atomWithStorage("filter", { name: "", rarity: "all" });
 const setsAtom = atom([]);
 
 let allSets = [];
-let rarityOrder = [];
 
 function atomWithStorage(key, initialValue) {
     const listeners = new Set();
@@ -105,7 +104,7 @@ function importWishlist() {
 }
 
 function exportWishlist() {
-    document.getElementById("export-field").value = JSON.stringify(Object.fromEntries(Object.entries(wishlistAtom.get()).map(([setName, cards]) => [setName, [...cards].sort((a, b) => rarityOrder.indexOf(a.rarity) - rarityOrder.indexOf(b.rarity))])), null, 4);
+    document.getElementById("export-field").value = JSON.stringify(Object.fromEntries(Object.entries(wishlistAtom.get()).map(([setName, cards]) => [setName, [...cards].sort((a, b) => a.index - b.index)])), null, 4);
 
     navigator.clipboard.writeText(json).then(() => showToast("Copied to clipboard!"));
 }
@@ -223,7 +222,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("name-filter").value = filterAtom.get().name;
 
     allSets = setsJSON.map(set => set.cards ? { ...set, cards: set.cards.filter(card => tradeableJSON.includes(card.rarity)) } : set);
-    rarityOrder = tradeableJSON;
 
     setsAtom.subscribe(sets => renderSets(sets));
     setsAtom.set(allSets);
