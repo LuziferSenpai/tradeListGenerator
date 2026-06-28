@@ -1,7 +1,8 @@
 const wishlistAtom = atomWithStorage("wishlist", {});
 const filterAtom = atomWithStorage("filter", { name: "", rarity: "all" });
-const allSetsAtom = atom([]);
 const setsAtom = atom([]);
+
+let allSets = [];
 
 function atomWithStorage(key, initialValue) {
     const listeners = new Set();
@@ -222,15 +223,15 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     document.getElementById("name-filter").value = filterAtom.get().name;
 
-    allSetsAtom.set(setsJSON.map(set => set.cards ? { ...set, cards: set.cards.filter(card => tradeableJSON.includes(card.rarity)) } : set));
+    allSets = setsJSON.map(set => set.cards ? { ...set, cards: set.cards.filter(card => tradeableJSON.includes(card.rarity)) } : set);
 
     setsAtom.subscribe(sets => renderSets(sets));
-    setsAtom.set(allSetsAtom.get());
+    setsAtom.set(allSets);
 
     filterAtom.subscribe(({ name, rarity }) => {
         if (rarity === "all") rarityDisplay.innerHTML = "All";
         else rarityDisplay.innerHTML = `<img src="./rarities/${rarity}.png" class="h-3 object-contain">`;
 
-        setsAtom.set(allSetsAtom.get().map(set => set.cards ? { ...set, cards: set.cards.filter(card => card.name.toLowerCase().includes(name) && (rarity === "all" || card.rarity === rarity)) } : set));
+        setsAtom.set(allSets.map(set => set.cards ? { ...set, cards: set.cards.filter(card => card.name.toLowerCase().includes(name) && (rarity === "all" || card.rarity === rarity)) } : set));
     })
 });

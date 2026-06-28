@@ -6,6 +6,7 @@
 textarea {
     height: clamp(1vh, 10vh, 20vh);
 }
+
 .set-accordion-content {
     grid-template-columns: repeat(auto-fill, 200px);
 
