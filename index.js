@@ -104,7 +104,9 @@ function importWishlist() {
 }
 
 function exportWishlist() {
-    document.getElementById("export-field").value = JSON.stringify(Object.fromEntries(Object.entries(wishlistAtom.get()).map(([setName, cards]) => [setName, [...cards].sort((a, b) => a.index - b.index)])), null, 4);
+    const json = JSON.stringify(Object.fromEntries(Object.entries(wishlistAtom.get()).map(([setName, cards]) => [setName, [...cards].sort((a, b) => a.index - b.index)])), null, 4);
+
+    document.getElementById("export-field").value = json;
 
     navigator.clipboard.writeText(json).then(() => showToast("Copied to clipboard!"));
 }
